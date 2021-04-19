@@ -8,3 +8,4 @@ class Doctor():
         self.usuario = usuario
         self.password = password
         self.especialidad = especialidad
+        self.telefono = telefono
