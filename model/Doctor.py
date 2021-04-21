@@ -1,6 +1,5 @@
 class Doctor():
-
-    def __init__(self, nombre, appelido, fecha, sexo, usuario, password, especialidad, telefono):
+    def __init__(self, nombre, apellido, fecha, sexo, usuario, password, especialidad, telefono):
         self.nombre = nombre
         self.apellido = apellido
         self.fecha = fecha
