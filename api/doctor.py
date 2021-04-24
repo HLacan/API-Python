@@ -89,11 +89,22 @@ def getDoctor(usuario):
     
 
 
-@urlDoctor.route('/updateDoctor')
-def updateDoctor():
+@urlDoctor.route('/api/updateDoctor/<usuario>')
+def updateDoctor(usuario):
     return 'Actualizando Doctor'
 
 
-@urlDoctor.route('/deleteDoctor')
-def deleteDoctor():
-    return 'Eliminando Doctor'
+@urlDoctor.route('/api/deleteDoctor/<usuario>',methods=['GET'])
+def deleteDoctor(usuario):
+    encontrado = False
+    for i in doctores:
+        if i.usuario == usuario:
+            doctores.remove(i)
+            encontrado = True
+            break
+        
+    if encontrado:
+        return jsonify({'res': 'eliminado'})
+    else:
+        return jsonify({'res':'usuario no encontrado'})
+    
