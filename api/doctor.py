@@ -62,7 +62,6 @@ def getDoctores():
         })
     return jsonify(response)
 
-
 @urlDoctor.route('/api/getDoctor/<usuario>', methods=['GET'])
 def getDoctor(usuario):
     encontrado = False
@@ -86,13 +85,23 @@ def getDoctor(usuario):
         return jsonify(res)
     else:
         return jsonify({'res':'No encontrado'})
+
+@urlDoctor.route('/api/getUpdateDoctor/<usuario>', methods=['GET'])
+def getUpdateDoctor(usuario):
+    encontrado = False
+    for i in doctores:
+        if i.usuario == usuario:
+            encontrado = True
     
+    if encontrado == True:
+        return jsonify({'res':'existe'})
+    else:
+        return jsonify({'res':'no existe'})
 
 
 @urlDoctor.route('/api/updateDoctor/<usuario>')
 def updateDoctor(usuario):
     return 'Actualizando Doctor'
-
 
 @urlDoctor.route('/api/deleteDoctor/<usuario>',methods=['GET'])
 def deleteDoctor(usuario):
