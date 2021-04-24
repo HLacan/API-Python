@@ -6,12 +6,7 @@ from model.Doctor import Doctor
 
 doctores = []
 
-#doctores = [Doctor("Herbert","Lacan","31/05/1999",'M',"hlacan","abc123","Huesos","22537520")]
-# doctores.append(Doctor("Hellen","Hernandez","06/07/1994",'F',"helcan","zxc789","Corazon","47345057"))
-
-
 urlDoctor = Blueprint('doctor', __name__,)
-
 
 @urlDoctor.route('/api/addDoctor', methods=['POST'])
 def addDoctor():
@@ -22,13 +17,13 @@ def addDoctor():
     nombre = json['nombre']
     apellido = json['apellido']
     fecha = json['fecha']
-    sexo = json['sexo']
+    genero = json['genero']
     usuario = json['usuario']
     contrasena = json['contrasena']
     especialidad = json['especialidad']
     telefono = json['telefono']
 
-    if nombre is None and apellido is None and fecha is None and sexo is None and usuario is None and contrasena is None and especialidad is None:
+    if nombre is None and apellido is None and fecha is None and genero is None and usuario is None and contrasena is None and especialidad is None:
         return jsonify({'res': 'Campos Vacios'})
     else:
         for i in doctores:
@@ -41,8 +36,7 @@ def addDoctor():
             if telefono is None:
                 telefono = 'Ninguno'
 
-            doctores.append(Doctor(nombre, apellido, fecha, sexo,
-                            usuario, contrasena, especialidad, telefono))
+            doctores.append(Doctor(nombre, apellido, fecha, genero, usuario, contrasena, especialidad, telefono))
             return jsonify({'res': 'Doctor agregado correctamente'})
 
 
@@ -54,9 +48,9 @@ def getDoctores():
             'nombre': i.nombre,
             'apellido': i.apellido,
             'fecha': i.fecha,
-            'sexo': i.sexo,
+            'genero': i.genero,
             'usuario': i.usuario,
-            'contrasena': i.password,
+            'contrasena': i.contrasena,
             'especialidad': i.especialidad,
             'telefono': i.telefono
         })
@@ -72,9 +66,9 @@ def getDoctor(usuario):
                 'nombre': doctor.nombre,
                 'apellido': doctor.apellido,
                 'fecha': doctor.fecha,
-                'sexo': doctor.sexo,
+                'genero': doctor.genero,
                 'usuario': doctor.usuario,
-                'contrasena': doctor.password,
+                'contrasena': doctor.contrasena,
                 'especialidad': doctor.especialidad,
                 'telefono': doctor.telefono
             }
@@ -99,9 +93,32 @@ def getUpdateDoctor(usuario):
         return jsonify({'res':'no existe'})
 
 
-@urlDoctor.route('/api/updateDoctor/<usuario>')
-def updateDoctor(usuario):
-    return 'Actualizando Doctor'
+@urlDoctor.route('/api/updateDoctor', methods=['POST'])
+def updateDoctor():
+    json = request.get_json(force=True)
+
+    nombre = json['nombre']
+    apellido = json['apellido']
+    fecha = json['fecha']
+    genero = json['genero']
+    usuario = json['usuario']
+    contrasena = json['contrasena']
+    especialidad = json['especialidad']
+    telefono = json['telefono']
+
+    for i in doctores:
+        if i.usuario == usuario:
+            i.nombre = nombre
+            i.apellido = apellido
+            i.fecha = fecha
+            i.genero = genero
+            i.usuario = usuario
+            i.contrasena = contrasena
+            i.especialidad = especialidad
+            i.telefono = telefono
+            return jsonify({'res':'modificado'})
+            
+    
 
 @urlDoctor.route('/api/deleteDoctor/<usuario>',methods=['GET'])
 def deleteDoctor(usuario):
