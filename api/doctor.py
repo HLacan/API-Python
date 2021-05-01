@@ -4,7 +4,9 @@ from flask import request
 from flask_cors import CORS, cross_origin
 from model.Doctor import Doctor
 
+
 doctores = []
+doctores.append(Doctor("Achis","Control","1","1","1","1","1","1",))
 
 urlDoctor = Blueprint('doctor', __name__,)
 
