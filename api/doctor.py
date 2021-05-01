@@ -39,7 +39,6 @@ def addDoctor():
             doctores.append(Doctor(nombre, apellido, fecha, genero, usuario, contrasena, especialidad, telefono))
             return jsonify({'res': 'Doctor agregado correctamente'})
 
-
 @urlDoctor.route('/api/getDoctores', methods=['GET'])
 def getDoctores():
     response = []
@@ -92,7 +91,6 @@ def getUpdateDoctor(usuario):
     else:
         return jsonify({'res':'no existe'})
 
-
 @urlDoctor.route('/api/updateDoctor', methods=['POST'])
 def updateDoctor():
     json = request.get_json(force=True)
@@ -118,8 +116,6 @@ def updateDoctor():
             i.telefono = telefono
             return jsonify({'res':'modificado'})
             
-    
-
 @urlDoctor.route('/api/deleteDoctor/<usuario>',methods=['GET'])
 def deleteDoctor(usuario):
     encontrado = False
