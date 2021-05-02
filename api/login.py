@@ -4,6 +4,7 @@ from flask import request
 from flask_cors import CORS, cross_origin
 from flask import Blueprint
 from api.doctor import doctores
+from api.enfermera import enfermeras
 
 urlLogin = Blueprint('login', __name__,)
 
@@ -21,4 +22,16 @@ def login():
         for i in doctores:
             if(usuario == i.usuario and contrasena == i.contrasena):
                 return jsonify({'res': 'doctor'})
+                break
 
+        for i in enfermeras:
+            if(usuario == i.usuario and contrasena == i.contrasena):
+                return jsonify({'res': 'enfermera'})
+                break
+
+        for i in pacientes:
+            if(usuario == i.usuario and contrasena == i.contrasena):
+                return jsonify({'res':'paciente'})
+                break
+    
+    return jsonify({'res':'no existe'})
