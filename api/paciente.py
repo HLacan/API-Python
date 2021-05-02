@@ -49,3 +49,26 @@ def addPaciente():
 
             pacientes.append(Paciente(nombre, apellido, fecha, genero, usuario, contrasena, telefono))
             return jsonify({'res': 'Paciente agregada correctamente'})
+
+@urlPaciente.route('/api/getPaciente/<usuario>', methods=['GET'])
+def getPaciente(usuario):
+    encontrado = False
+    res = {}
+    for i in pacientes:
+        if i.usuario == usuario:
+            res = {
+                'nombre': i.nombre,
+                'apellido': i.apellido,
+                'fecha': i.fecha,
+                'genero': i.genero,
+                'usuario': i.usuario,
+                'contrasena': i.contrasena,
+                'telefono': i.telefono
+            }
+            encontrado = True
+            break
+    
+    if encontrado:
+        return jsonify(res)
+    else:
+        return jsonify({'res':'No encontrado'})
