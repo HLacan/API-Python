@@ -6,7 +6,7 @@ from model.Enfermera import Enfermera
 
 
 enfermeras = []
-enfermeras.append(Enfermera("Alia","Zata","1","1","1","1","1"))
+enfermeras.append(Enfermera("Shay","Hurtado","02/05/1996","F","shay01","trol","22537520"))
 
 urlEnfermera = Blueprint('enfermera', __name__,)
 
@@ -100,6 +100,8 @@ def updateEnfermera():
     contrasena = json['contrasena']
     telefono = json['telefono']
 
+    print(usuario)
+
     for i in enfermeras:
         if i.usuario == usuario:
             i.nombre = nombre
@@ -110,6 +112,8 @@ def updateEnfermera():
             i.contrasena = contrasena
             i.telefono = telefono
             return jsonify({'res':'modificado'})
+    
+    return jsonify({'res':'no ok'})
             
 @urlEnfermera.route('/api/deleteEnfermera/<usuario>',methods=['GET'])
 def deleteEnfermera(usuario):
