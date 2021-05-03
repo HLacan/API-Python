@@ -57,7 +57,7 @@ def login():
                 'usuario': i.usuario,
                 'contrasena': i.contrasena,
                 'telefono': i.telefono,
-                'tipo':'paciente'
+                'tipo':'enfermero'
             }
             return jsonify(res)
             break
