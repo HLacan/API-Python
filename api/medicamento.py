@@ -45,7 +45,7 @@ def addMedicamento():
                 return jsonify({'res': 'medicamento agregada correctamente'})
 
 @urlMedicamento.route('/api/getMedicamento/<nombre>', methods=['GET'])
-def getPaciente(nombre):
+def getMedicamento(nombre):
     encontrado = False
     res = {}
     for i in medicamentos:
@@ -63,3 +63,23 @@ def getPaciente(nombre):
         return jsonify(res)
     else:
         return jsonify({'res':'No encontrado'})
+
+@urlMedicamento.route('/api/updateMedicamento', methods=['POST'])
+def updateMedicamento():
+    json = request.get_json(force=True)
+
+    oldNombre = json['oldNombre']
+    newNombre = json['newNombre']
+    precio = json['precio']
+    descripcion = json['descripcion']
+    cantidad = json['cantidad']
+
+    for i in medicamentos:
+        if i.nombre == oldNombre:
+            i.nombre = newNombre
+            i.precio = precio
+            i.descripcion = descripcion
+            i.cantidad = cantidad
+            return jsonify({'res':'modificado'})
+    
+    return jsonify({'res':'no ok'})
