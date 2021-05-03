@@ -94,7 +94,7 @@ def updateEstado():
                         for k in j.cita:
                             if k.estado == 'pendiente':
                                 k.estado = 'aceptado'
-                                i.cita.append(CitaPaciente(k.fecha, k.hora, k.descripcion, k.estado, k.usuario))
+                                i.cita.append(CitaPaciente(k.fecha, k.hora, k.descripcion, k.estado, k.usuario, i.usuario))
                                 return({'res':'agregado'})
 
 
@@ -114,7 +114,8 @@ def getCitasAceptadas(usuario):
                         'hora': j.hora,
                         'descripcion': j.descripcion,
                         'estado': j.estado,
-                        'usuario': j.usuario
+                        'usuario': j.usuario,
+                        'doctor': j.doctor
                     })
 
     return jsonify(response)
@@ -131,7 +132,8 @@ def getCitasAceptadasE():
                         'hora': j.hora,
                         'descripcion': j.descripcion,
                         'estado': j.estado,
-                        'usuario': j.usuario
+                        'usuario': j.usuario,
+                        'doctor': j.doctor
                     })
 
     return jsonify(response)
