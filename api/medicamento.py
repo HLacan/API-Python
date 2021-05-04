@@ -37,9 +37,11 @@ def addMedicamento():
                 repetido = False
                 return jsonify({'res': 'medicamento ya repetido'})
                 break
-            else:
-                medicamentos.append(Medicamento(nombre, precio, descripcion, cantidad))
-                return jsonify({'res': 'medicamento agregada correctamente'})
+    
+        if repetido:        
+            medicamentos.append(Medicamento(nombre, precio, descripcion, cantidad))
+            return jsonify({'res': 'medicamento agregada correctamente'})
+    return jsonify({'res':'error'})
 
 @urlMedicamento.route('/api/getMedicamento/<nombre>', methods=['GET'])
 def getMedicamento(nombre):
