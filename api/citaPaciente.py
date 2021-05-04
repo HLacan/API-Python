@@ -86,6 +86,24 @@ def updateEstado():
                         j.estado = 'rechazado'
                         return jsonify({'res':'rechazado'})
                         break
+
+    elif estado == 'completado':
+        for i in doctores:
+            if i.usuario == doctor:
+                for j in i.cita:
+                    if j.usuario == usuario and j.doctor == j.doctor:
+                        j.estado = 'completado'
+
+        for i in doctores:
+            if i.usuario == doctor:
+                for j in pacientes:
+                    if j.usuario == usuario:
+                        for k in j.cita:
+                            if k.estado == 'aceptado':
+                                k.estado = 'completado'
+                                return({'res':'completado'})
+                
+
     else:
         for i in doctores:
             if i.usuario == doctor:
@@ -108,7 +126,7 @@ def getCitasAceptadas(usuario):
     for i in doctores:
         if i.usuario == usuario:
             for j in i.cita:
-                if j.estado == 'aceptado':
+                if j.estado == 'aceptado' or j.estado == 'completado':
                     response.append({
                         'fecha': j.fecha,
                         'hora': j.hora,
@@ -127,6 +145,24 @@ def getCitasAceptadasE():
     for i in doctores:
             for j in i.cita:
                 if j.estado == 'aceptado':
+                    response.append({
+                        'fecha': j.fecha,
+                        'hora': j.hora,
+                        'descripcion': j.descripcion,
+                        'estado': j.estado,
+                        'usuario': j.usuario,
+                        'doctor': j.doctor
+                    })
+
+    return jsonify(response)
+
+@urlCitaPaciente.route('/api/getCitasAceptadasD', methods=['GET'])
+def getCitasAceptadasD():
+    response = []
+ 
+    for i in doctores:
+            for j in i.cita:
+                if j.estado == 'aceptado' or j.estado == 'completado':
                     response.append({
                         'fecha': j.fecha,
                         'hora': j.hora,
