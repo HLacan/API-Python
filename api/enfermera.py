@@ -96,19 +96,18 @@ def updateEnfermera():
     apellido = json['apellido']
     fecha = json['fecha']
     genero = json['genero']
-    usuario = json['usuario']
+    oldUsuario = json['oldUsuario']
+    newUsuario = json['newUsuario']
     contrasena = json['contrasena']
     telefono = json['telefono']
-
-    print(usuario)
-
+    
     for i in enfermeras:
-        if i.usuario == usuario:
+        if i.usuario == oldUsuario:
             i.nombre = nombre
             i.apellido = apellido
             i.fecha = fecha
             i.genero = genero
-            i.usuario = usuario
+            i.usuario = newUsuario
             i.contrasena = contrasena
             i.telefono = telefono
             return jsonify({'res':'modificado'})
