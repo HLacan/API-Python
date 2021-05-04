@@ -5,8 +5,8 @@ from flask_cors import CORS, cross_origin
 from model.Medicamento import Medicamento
 
 medicamentos = []
-medicamentos.append(Medicamento("Lanzoprazol","5.50","alivia el dolor","100"))
-medicamentos.append(Medicamento("Acetaminofen","10.75","dolores de cabeza","75"))
+medicamentos.append(Medicamento("lanzoprazol","5.50","alivia el dolor","100"))
+medicamentos.append(Medicamento("acetaminofen","10.75","dolores de cabeza","75"))
 
 
 urlMedicamento = Blueprint('medicamento', __name__,)
@@ -27,7 +27,7 @@ def getMedicamentos():
 def addMedicamento():
     repetido = True
     json = request.get_json(force=True)
-    nombre = json['nombre']
+    nombre = json['nombre'].lower()
     precio = json['precio']
     descripcion = json['descripcion']
     cantidad = json['cantidad']
@@ -68,8 +68,8 @@ def getMedicamento(nombre):
 def updateMedicamento():
     json = request.get_json(force=True)
 
-    oldNombre = json['oldNombre']
-    newNombre = json['newNombre']
+    oldNombre = json['oldNombre'].lower()
+    newNombre = json['newNombre'].lower()
     precio = json['precio']
     descripcion = json['descripcion']
     cantidad = json['cantidad']
@@ -83,3 +83,17 @@ def updateMedicamento():
             return jsonify({'res':'modificado'})
     
     return jsonify({'res':'no ok'})
+
+@urlMedicamento.route('/api/deleteMedicamento/<nombre>',methods=['GET'])
+def deleteEnfermera(nombre):
+    encontrado = False
+    for i in medicamentos:
+        if i.nombre == nombre:
+            medicamentos.remove(i)
+            encontrado = True
+            break
+        
+    if encontrado:
+        return jsonify({'res': 'eliminado'})
+    else:
+        return jsonify({'res':'usuario no encontrado'})
