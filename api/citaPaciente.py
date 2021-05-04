@@ -17,14 +17,6 @@ def addCitaPaciente():
     usuario = json['usuario']
     estado = json['estado']
 
-    #print(len(pacientes[0].cita))
-    #print(len(pacientes[1].cita))
-
-    #for i in range(len(pacientes)):
-        #print(len(pacientes[i].cita))  
-
-    
-
     for i in pacientes:
         if i.usuario == usuario:
             if len(i.cita) == 0:

@@ -5,9 +5,6 @@ from flask_cors import CORS, cross_origin
 from model.Medicamento import Medicamento
 
 medicamentos = []
-medicamentos.append(Medicamento("lanzoprazol","5.50","alivia el dolor","100"))
-medicamentos.append(Medicamento("acetaminofen","10.75","dolores de cabeza","75"))
-
 
 urlMedicamento = Blueprint('medicamento', __name__,)
 

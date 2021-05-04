@@ -6,7 +6,6 @@ from model.Enfermera import Enfermera
 
 
 enfermeras = []
-enfermeras.append(Enfermera("Shay","Hurtado","02/05/1996","F","shay01","trol","22537520"))
 
 urlEnfermera = Blueprint('enfermera', __name__,)
 
@@ -100,7 +99,7 @@ def updateEnfermera():
     newUsuario = json['newUsuario']
     contrasena = json['contrasena']
     telefono = json['telefono']
-    
+
     for i in enfermeras:
         if i.usuario == oldUsuario:
             i.nombre = nombre

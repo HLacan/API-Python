@@ -7,12 +7,6 @@ from model.CitaPaciente import CitaPaciente
 urlPaciente = Blueprint('paciente', __name__,)
 
 pacientes = []
-pacientes.append(Paciente("Herbert","Lacan","31/05/1999","M","hlacan","3105","47345057"))
-
-pacientes.append(Paciente("lolencio","can","05/05/1950","M","wario","01","NA")) 
-
-pacientes[1].cita.append(CitaPaciente('03/05/2021','23:30','me duele la panza', 'pendiente', 'wario'))
-pacientes[0].cita.append(CitaPaciente('31/05/1900','12:50','le duele la tripa', 'pendiente', 'hlacan'))
 
 @urlPaciente.route('/api/getPacientes', methods=['GET'])
 def getPacientes():
