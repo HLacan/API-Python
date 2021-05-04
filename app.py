@@ -9,6 +9,7 @@ from api.paciente import urlPaciente
 from api.validate import urlValidate
 from api.admin import urlAdmin
 from api.citaPaciente import urlCitaPaciente
+from api.medicamento import urlMedicamento
 
 def create_app(): 
     app = Flask(__name__)
@@ -19,6 +20,7 @@ def create_app():
     app.register_blueprint(urlAdmin)
     app.register_blueprint(urlValidate)
     app.register_blueprint(urlCitaPaciente)
+    app.register_blueprint(urlMedicamento)
     CORS(app) 
     return app 
 
