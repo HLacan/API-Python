@@ -102,22 +102,25 @@ def updateDoctor():
     apellido = json['apellido']
     fecha = json['fecha']
     genero = json['genero']
-    usuario = json['usuario']
+    oldUsuario = json['oldUsuario']
+    newUsuario = json['newUsuario']
     contrasena = json['contrasena']
     especialidad = json['especialidad']
     telefono = json['telefono']
 
     for i in doctores:
-        if i.usuario == usuario:
+        if i.usuario == oldUsuario:
             i.nombre = nombre
             i.apellido = apellido
             i.fecha = fecha
             i.genero = genero
-            i.usuario = usuario
+            i.usuario = newUsuario
             i.contrasena = contrasena
             i.especialidad = especialidad
             i.telefono = telefono
             return jsonify({'res':'modificado'})
+
+    return jsonify({'res':'error'})
             
 @urlDoctor.route('/api/deleteDoctor/<usuario>',methods=['GET'])
 def deleteDoctor(usuario):
